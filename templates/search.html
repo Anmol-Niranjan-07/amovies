@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Search Results</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results</h1>
+        {% if error %}
+            <p>{{ error }}</p>
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Try Again</a>
+        {% else %}
+            <div class="row">
+                {% for movie in movies %}
+                    <div class="col-md-3 mb-4">
+                        <div class="card fixed-card-size" style="outline: auto;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ movie.title }}</h5>
+                                <a href="{{ url_for('watch', imdb_id=movie.imdb_id) }}" class="btn btn-primary">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Search Again</a>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
